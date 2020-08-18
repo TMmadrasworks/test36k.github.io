@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" href="../static/main.css">
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+      <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <style>
+         body {font-family: Arial;}
+         /* Style the tab */
+         .tab {
+         overflow: hidden;
+         border: 1px solid #ccc;
+         background-color: #f1f1f1;
+         }
+         /* Style the buttons inside the tab */
+         .tab button {
+         background-color: inherit;
+         float: left;
+         border: none;
+         outline: none;
+         cursor: pointer;
+         padding: 14px 16px;
+         transition: 0.3s;
+         font-size: 17px;
+         }
+         /* Change background color of buttons on hover */
+         .tab button:hover {
+         background-color: #ddd;
+         }
+         /* Create an active/current tablink class */
+         .tab button.active {
+         background-color: #ccc;
+         }
+         /* Style the tab content */
+         .tabcontent {
+         display: none;
+         padding: 6px 12px;
+         -webkit-animation: fadeEffect 1s;
+         animation: fadeEffect 1s;
+         }
+         /* Fade in tabs */
+         @-webkit-keyframes fadeEffect {
+         from {opacity: 0;}
+         to {opacity: 1;}
+         }
+         @keyframes fadeEffect {
+         from {opacity: 0;}
+         to {opacity: 1;}
+         }
+      </style>
+   </head>
+   <body>
+      <br><center>
+         <h3>Details on Vaccination : Madras Medical</h3>
+      </center><hr>
+      <div class="tab">
+         <button class="tablinks" onclick="openCity(event, 'London')">Names</button>
+         <button class="tablinks" onclick="openCity(event, 'Paris')">Centers</button>
+         <button class="tablinks" onclick="openCity(event, 'Delhi')">Immunisation Rates</button>
+         <button class="tablinks" onclick="openCity(event, 'Taipei')">Schedules</button>
+      </div>
+
+
+
+      <div id="London" class="tabcontent">
+         <hr><center><h3>Curated List of Vaccinations</h3>
+         <h5><a href="#" class="home_btn" onclick="location.reload();location.href='https://docs.google.com/spreadsheets/d/e/2PACX-1vRz5cWcpLDGy-vFlifoCdAJWLObd6dwp-6XSLS39FKhgkaBVASRBt0ahrP3jTkttQngbSDeksbOpygp/pubhtml?gid=0&single=true'">More Details</a> </h5></center>
+
+         <ul>
+            <li>Bacillus Calmette–Guérin (BCG)</li>
+            <li>Hepatitis A (HEP- A)</li>
+            <li>Hepatitis B (HEP- B)</li>
+            <li>Human papillomavirus (HPV)</li>
+            <li>Haemophilus influenzae Vaccine (HIB)</li>
+            <li>Inactivated poliovirus Vaccine (IPV)</li>
+            <li>Oral Polio Vaccine (OPV)</li>
+            <li>Tetanus Toxoid (TT)</li>
+            <li>Tetanus and diphtheria Vaccine (TD)</li>
+            <li>Diphtheria, Tetanus, Pertussis (DTap)</li>
+            <li>Tetanus, diphtheria, pertussis (TDAP)</li>
+            <li>Diphtheria, Tetanus, Pertussis, Inactivated Polio (DTaP-IPV)</li>
+            <li>Diphtheria and tetanus toxoids and whole-cell pertussis (DTWP)</li>
+            <li>Diphtheria, Pertussis and Tetanus (DPT) / (DTP)</li>
+            <li>Rotavirus Vaccine (RV)</li>
+            <li>Shingles / Zooster Vaccine</li>
+            <li>Varicella (Chicken pox)</li>
+            <li>Japanese Encephalitis (JE)</li>
+            <li>Pneumococcal Conjugate Vaccine (PCV)  </li>
+            <li>Pneumococcal polysaccharide vaccine (PPV)</li>
+            <li>Measles </li>
+            <li>MR (Measles – Rubella)</li>
+            <li>Measles/MMR</li>
+            <li>Typhoid Conjugate Vaccine (TCV)</li>
+            <li>Flu Shots (influenza)</li>
+            <li>Rabies Vaccination</li>
+            <li>Pentavalent vaccine (5 in One Vaccine)</li>
+            <li>Vitamin A </li>
+            <li>Meningococcal vaccine </li>
+            <li>MenACWY-D (Menactra, Sanofi Pasteur)</li>
+            <li>Cholera</li>
+            <li>Yellow Fever</li>
+         </ul>
+
+         <a href="#" class="home_btn" onclick="location.reload();location.href='https://docs.google.com/spreadsheets/d/e/2PACX-1vRz5cWcpLDGy-vFlifoCdAJWLObd6dwp-6XSLS39FKhgkaBVASRBt0ahrP3jTkttQngbSDeksbOpygp/pub?output=csv'">To Download the Full list</a>
+
+      </div>
+      
+
+      <div id="Paris" class="tabcontent">
+       <center><a href="#" class="home_btn" onclick="location.reload();location.href='https://docs.google.com/spreadsheets/d/e/2PACX-1vTDbghgv0CATc4_lkHIBGW01ncTaH_-rshcCL0GnrpxdDVPhNEawwsBOmfaOsq11Gq8Aj8ggVBwSfAQ/pub?output=pdf'">All centers Tamil Nadu </a> </center>
+
+      <div class = 'container'>
+         <canvas id = 'myChart'></canvas>
+         <p></p>
+      </div>
+
+      <script>
+         let myChart = document.getElementById('myChart').getContext('2d');
+         
+         // Global Options
+         Chart.defaults.global.defaultFontFamily = 'Lato';
+         Chart.defaults.global.defaultFontSize = 18;
+         Chart.defaults.global.defaultFontColor = '#777';
+         
+         let massPopChart = new Chart(myChart, {
+           type:'horizontalBar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+           data:{
+             labels:["Chennai - 99",
+         "Coimbatore - 100",
+         "Madurai - 65",
+         "Tiruchirappalli - 78",
+         "Tiruppur - 90",
+         "Salem - 78",
+         "Erode - 25",
+         "Tirunelveli - 70",
+         "Vellore - 59" ,
+         "Thoothukkudi - 48",
+         "Dindigul - 57",
+         "Thanjavur - 63",
+         "Ranipet - 23",
+         "Sivakasi - 18",
+         "Karur - 17"],
+             datasets:[{
+               label:'Population in Lakhs',
+               data:[
+                 86.96,
+                 21.51,
+                 14.62,
+                 10.21,
+                 9.63,
+                 9.20,
+                 5.21,
+                 5.00,
+                 4.81,
+                 4.11,
+                 2.92,
+                 2.90,
+                 2.62,
+                 2.34,
+                 2.33,
+                 2.00
+               ],
+               
+               //backgroundColor:'green',
+               backgroundColor:[
+                 'rgba(255, 99, 132, 0.6)',
+                 'rgba(54, 162, 235, 0.6)',
+                 'rgba(255, 206, 86, 0.6)',
+                 'rgba(75, 192, 192, 0.6)',
+                 'rgba(153, 102, 255, 0.6)',
+                 'rgba(255, 159, 64, 0.6)',
+                 'rgba(255, 99, 132, 0.6)',
+                 'rgba(255, 99, 132, 0.6)',
+                 'rgba(54, 162, 235, 0.6)',
+                 'rgba(255, 206, 86, 0.6)',
+                 'rgba(75, 192, 192, 0.6)',
+                 'rgba(153, 102, 255, 0.6)',
+                 'rgba(255, 159, 64, 0.6)',
+                 'rgba(255, 99, 132, 0.6)'
+               ],
+               borderWidth:1,
+               borderColor:'#777',
+               hoverBorderWidth:3,
+               hoverBorderColor:'#000'
+             }]
+           },
+           options:{
+             title:{
+               display:true,
+               text:'Largest Cities In Tamin Nadu',
+               fontSize:20
+             },
+             legend:{
+               display:true,
+               position:'right',
+               labels:{
+                 fontColor:'#000'
+               }
+             },
+             layout:{
+               padding:{
+                 left:30,
+                 right:0,
+                 bottom:0,
+                 top:0
+               }
+             },
+             tooltips:{
+               enabled:true
+             }
+           }
+         });
+      </script>
+
+
+
+
+      <script>
+         function openCity(evt, cityName) {
+           var i, tabcontent, tablinks;
+           tabcontent = document.getElementsByClassName("tabcontent");
+           for (i = 0; i < tabcontent.length; i++) {
+             tabcontent[i].style.display = "none";
+           }
+           tablinks = document.getElementsByClassName("tablinks");
+           for (i = 0; i < tablinks.length; i++) {
+             tablinks[i].className = tablinks[i].className.replace(" active", "");
+           }
+           document.getElementById(cityName).style.display = "block";
+           evt.currentTarget.className += " active";
+         }
+      </script>
+   </body>
+</html>
